@@ -5,8 +5,10 @@ using UnityEngine;
 public class DestroyModule : MonoBehaviour
 {
     [SerializeField]
+    [Min(0.1f)]
     private float destroyDelay;
     [SerializeField]
+    [Min(1)]
     private int minimalDestroyingObjectsCount;
 
     [SerializeField]
