@@ -7,9 +7,11 @@ using UnityEngine;
 public class TransparentModule : MonoBehaviour
 {
     [SerializeField]
+    [Range(min: 0, max: 100)]
     private float changeSpeed;
 
     [SerializeField]
+    [Range(min: 0, max: 1)]
     private float defaultAlpha;
 
     [SerializeField]
