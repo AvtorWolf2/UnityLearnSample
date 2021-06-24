@@ -10,14 +10,13 @@ public class TransparentModule : MonoBehaviour
     [Range(min: 0, max: 100)]
     private float changeSpeed;
 
-    [SerializeField]
-    [Range(min: 0, max: 1)]
+    
     private float defaultAlpha;
 
-    [SerializeField]
+    
     private Material mat;
 
-    [SerializeField]
+    
     private bool toDefault;
 
     private void Start()

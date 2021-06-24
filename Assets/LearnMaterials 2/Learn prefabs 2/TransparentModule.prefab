@@ -95,6 +95,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeSpeed: 1
-  defaultAlpha: 0
-  mat: {fileID: 0}
-  toDefault: 1
+  defaultAlpha: 1
+  mat: {fileID: 2100000, guid: 5e745dd33af60df4385956528926ca88, type: 2}
+  toDefault: 0
