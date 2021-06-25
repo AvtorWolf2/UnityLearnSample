@@ -50,8 +50,9 @@ MonoBehaviour:
     targetState: 0
     defaultValue: 0
   - targetGO: {fileID: 780059478107394980}
-    targetState: 1
+    targetState: 0
     defaultValue: 0
+  debug: 1
 --- !u!1 &780059477964288740
 GameObject:
   m_ObjectHideFlags: 0
@@ -70,7 +71,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &780059477964288736
 Transform:
   m_ObjectHideFlags: 0
