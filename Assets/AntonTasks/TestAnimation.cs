@@ -9,75 +9,110 @@ public class TestAnimation : MonoBehaviour
 
     List<GameObject> animatedObjects = new List<GameObject>();
 
-    float animationSpeed = 2.0f;
+    [SerializeField]
+    [Min(1)]
+    int wallHeight = 4;
 
+    [SerializeField]
+    [Min(1)]
+    int wallWidth = 16;
+
+    float animationSpeed = 1f;
     bool animationDone = false;
 
-    // Start is called before the first frame update
+    float defaultObjScale;
+
+    [SerializeField]
+    [Min(0)]
+    float targetObjScale = 0.2f;
+
+    [SerializeField]
+    Vector3 startGenerationCoordinates = new Vector3(-1.25f, 0.25f, -8.5f);
+
     void Start()
     {
-        float yCoord = 0.25f;
-        for (int i = 0; i < 4; i++)
+        defaultObjScale = animatedObj.transform.localScale.x;
+        var currentGenerationCoordinates = startGenerationCoordinates;
+        for (int i = 0; i < wallHeight; i++)
         {
-            float xCoord = -1.25f;
-            for (int j = 0; j < 16; j++)
+            for (int j = 0; j < wallWidth; j++)
             {
-                var clone = Instantiate(animatedObj, new Vector3(-j + xCoord, i + yCoord, -8.5f), Quaternion.identity);
+                var clone = Instantiate(animatedObj, 
+                    new Vector3(
+                        currentGenerationCoordinates.x, 
+                        currentGenerationCoordinates.y, 
+                        currentGenerationCoordinates.z
+                    ), 
+                    Quaternion.identity);
+
                 animatedObjects.Add(clone);
 
-                xCoord += 0.5f;
+                currentGenerationCoordinates.x -= defaultObjScale;
             }
-            yCoord -= 0.5f;
+
+            currentGenerationCoordinates.x = startGenerationCoordinates.x;
+            currentGenerationCoordinates.y += defaultObjScale;
         }
     }
 
-    // Update is called once per frame
-    void Update()
+
+void Update()
+{
+    if (!animationDone)
     {
-        if (!animationDone)
-        {
-            //Debug.Log("I'm in if!");
-            StartCoroutine(animateObject(true));
-        }
-
-        else
-        {
-            //Debug.Log("I'm in else!");
-            StartCoroutine(animateObject(false));
-        }
+        StartCoroutine(animateObject(true));
     }
 
-    IEnumerator animateObject(bool way)
+    else
     {
-        if (way)
-        {
-            foreach (var obj in animatedObjects)
-            {
-                if (obj.transform.position.z < -6.0f && obj.transform.localScale.z > 0.2f)
-                {
-                    obj.transform.position += new Vector3(0.0f, 0.0f, 1.0f) * Time.deltaTime * animationSpeed;
-                    obj.transform.localScale -= new Vector3(0.4f, 0.4f, 0.4f) * Time.deltaTime * animationSpeed;
-                }
-                yield return new WaitForSeconds(0.01f);
-            }
-
-            animationDone = true;
-            yield break;
-        }
-
-        else{
-            foreach (var obj in animatedObjects)
-            {
-                if (obj.transform.position.z > -9.0f && obj.transform.localScale.z < 0.5f)
-                {
-                    obj.transform.position -= new Vector3(0.0f, 0.0f, 1.0f) * Time.deltaTime * animationSpeed;
-                    obj.transform.localScale += new Vector3(0.4f, 0.4f, 0.4f) * Time.deltaTime * animationSpeed;
-                }
-                yield return new WaitForSeconds(0.01f);
-            }
-
-            animationDone = false;
-            yield break;
-        }
+        StartCoroutine(animateObject(false));
     }
+}
+
+IEnumerator animateObject(bool way)
+{
+    if (way)
+    {
+        foreach (var obj in animatedObjects)
+        {
+            if (/*obj.transform.position.z < -6.0f &&*/ obj.transform.localScale.z > targetObjScale)
+            {
+                // obj.transform.position += new Vector3(0.0f, 0.0f, 1.0f) * Time.deltaTime * animationSpeed;
+
+                var scale = Time.deltaTime * animationSpeed;
+                obj.transform.localScale -= new Vector3(scale, scale, scale);
+            }
+
+            // obj.transform.position = new Vector3(0.0f, 0.0f, -6.0f);
+            // obj.transform.localScale = new Vector3(targetObjScale, targetObjScale, targetObjScale);
+
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        animationDone = true;
+        yield break;
+    }
+
+    else
+    {
+        foreach (var obj in animatedObjects)
+        {
+            if (/*obj.transform.position.z > -9.0f &&*/ obj.transform.localScale.z < defaultObjScale)
+            {
+                // obj.transform.position -= new Vector3(0.0f, 0.0f, 1.0f) * Time.deltaTime * animationSpeed;
+
+                var scale = Time.deltaTime * animationSpeed;
+                obj.transform.localScale += new Vector3(scale, scale, scale);
+            }
+
+            // obj.transform.position = new Vector3(0.0f, 0.0f, -9.0f);
+            // obj.transform.localScale = new Vector3(defaultObjScale, defaultObjScale, defaultObjScale);
+
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        animationDone = false;
+        yield break;
+    }
+}
 }
