@@ -16,4 +16,8 @@ public class RunAllScripts : MonoBehaviour
         }
     }
 
+    public void Update()
+    {
+        runScripts();
+    }
 }
