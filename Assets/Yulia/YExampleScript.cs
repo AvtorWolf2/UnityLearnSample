@@ -16,27 +16,48 @@ public class YExampleScript : SampleScript
     [SerializeField]
     private float speed = 1;
 
-    /*private void Update()
+    private float t;
+
+    private Quaternion startRotation;
+
+    private Quaternion targetRotation;
+
+    private void Awake()
     {
-        Use();
+        t = -1;
+    }
+    private void Update()
+    {
+        Go();
+    }
+    
+    private void Go()
+    {
+        if(t >= 0)
+        {
+            t += Time.deltaTime;
+            transform.rotation = Quaternion.Lerp(startRotation, targetRotation, t);
+            if (t > 1)
+            {
+                t = -1;
+            }
+        }
     }
 
-    [ContextMenu("Go")]
-    public void Go()
+    [ContextMenu("Запуск")]
+    public override void Use()
     {
-        StartCoroutine(Inf());
+        startRotation = transform.rotation;
+        targetRotation = Quaternion.Euler(new Vector3(cx, cy, cz));
+        t = 0;
     }
 
+    /*
     [ContextMenu("Stop")]
     public void Stop()
     {
         StopAllCoroutines();
     }*/
-
-    public override void Use()
-    {
-        transform.rotation = transform.rotation * Quaternion.Euler(new Vector3(cx, cy, cz) * speed * Time.deltaTime);
-    }
 
     /*private IEnumerator Inf()
     {

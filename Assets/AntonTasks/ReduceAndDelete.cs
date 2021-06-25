@@ -12,6 +12,7 @@ public class ReduceAndDelete : SampleScript
 
     List<Transform> childList = new List<Transform>();
 
+    [ContextMenu("Запуск")]
     public override void Use()
     {
         StartCoroutine(deleteChildsCoroutine(childList));

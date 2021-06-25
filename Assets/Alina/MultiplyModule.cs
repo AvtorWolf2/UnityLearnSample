@@ -17,19 +17,13 @@ public class MultiplyModule : SampleScript
     [Tooltip("Шаг")]
     private float Step;
 
-    private bool done = false;
-
+    [ContextMenu("Запуск")]
     public override void Use()
     {
-        if (done == false)
+        for (int i = 0; i < Count; i++)
         {
-            for (int i = 0; i < Count; i++)
-            {
-                Instantiate(prefab, prefab.transform.position + new Vector3(0, 0, Step), Quaternion.identity, transform);
-            }
-            done = true;
+            Instantiate(prefab, prefab.transform.position + new Vector3(0, 0, Step), Quaternion.identity, transform);
         }
-        
     }
 
     
