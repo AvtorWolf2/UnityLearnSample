@@ -13,8 +13,8 @@ public class YExampleScript : SampleScript
     [SerializeField]
     private float cz = 1;
 
-    [SerializeField]
-    private float speed = 1;
+    //[SerializeField]
+    //private float speed = 1;
 
     private float t;
 
