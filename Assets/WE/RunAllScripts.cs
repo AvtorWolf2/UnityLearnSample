@@ -4,16 +4,14 @@ using UnityEngine;
 public class RunAllScripts : MonoBehaviour
 {
     [SerializeField]
-    List<Transform> objects = new List<Transform>();
+    List<SampleScript> objects = new List<SampleScript>();
 
     [ContextMenu("Запустить скрипты")]
     void runScripts()
     {
         foreach (var obj in objects)
         {
-            SampleScript script = obj.GetComponent<SampleScript>();
-            script.Use();
+            obj.Use();
         }
     }
-
 }

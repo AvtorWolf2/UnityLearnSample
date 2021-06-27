@@ -17,12 +17,12 @@ public class MultiplyModule : SampleScript
     [Tooltip("Шаг")]
     private float Step;
 
-
+    [ContextMenu("Запуск")]
     public override void Use()
     {
         for (int i = 0; i < Count; i++)
         {
-            Instantiate(prefab,new  Vector3(0, 0, Step), Quaternion.identity , transform);
+            Instantiate(prefab, prefab.transform.position + new Vector3(0, 0, Step), Quaternion.identity, transform);
         }
     }
 
