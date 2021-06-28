@@ -10,7 +10,15 @@ public class P1Script : SampleScript
 
     public float speed;
 
+    public bool Done;
+
+    [ContextMenu("Запуск")]
     public override void Use()
+    {
+        Done = true;
+    }
+
+    private void Move()
     {
         Vector3 direction = new Vector3(x1, y1, z1) - transform.position;
 
@@ -19,8 +27,20 @@ public class P1Script : SampleScript
             transform.forward = direction;
             transform.position += direction.normalized * Time.deltaTime * speed;
         }
+
+        else
+        {
+            Done = false;
+        }
     }
 
+    private void Update()
+    {
+        if(Done == true)
+        {
+            Move();
+        }
+    }
     /*private void Start()
     {
         Application.targetFrameRate = 60;

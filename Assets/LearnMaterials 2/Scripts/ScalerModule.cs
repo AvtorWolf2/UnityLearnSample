@@ -1,11 +1,18 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 [HelpURL("https://docs.google.com/document/d/1rdTEVSrCcYOjqTJcFCHj46RvnbdJhmQUb3gHMDhVftI/edit?usp=sharing")]
 public class ScalerModule : MonoBehaviour
 {
+    [SerializeField]
+    [Min(0)]
+    [Tooltip("Конечный размер")]
     private Vector3 targetScale = new Vector3(2,2,2);
 
+    [SerializeField]
+    [Range(0.1f ,10)]
+    [Tooltip("Скорость изменения")]
     private float changeSpeed;
 
     private Vector3 defaultScale;
@@ -19,6 +26,7 @@ public class ScalerModule : MonoBehaviour
         toDefault = false;
     }
 
+    [ContextMenu("Запуск")]
     public void ActivateModule()
     {
         Vector3 target = toDefault ? defaultScale : targetScale;
@@ -27,12 +35,14 @@ public class ScalerModule : MonoBehaviour
         toDefault = !toDefault;
     }
 
+    [ContextMenu("Возврат")]
     public void ReturnToDefaultState()
     {
         toDefault = true;
         ActivateModule();
     }
 
+    [SerializeField]
     private IEnumerator ScaleCoroutine(Vector3 target)
     {
         Vector3 start = myTransform.lossyScale;
