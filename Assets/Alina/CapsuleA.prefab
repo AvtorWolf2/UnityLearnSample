@@ -109,6 +109,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9cd8d05c436b9f47a775f734b2ce427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  Count: 0
-  Step: 0
+  prefab: {fileID: 6636892974991924366}
+  Count: 3
+  Step: 2

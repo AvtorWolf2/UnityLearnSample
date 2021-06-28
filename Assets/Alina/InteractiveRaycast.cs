@@ -35,10 +35,9 @@ public class InteractiveRaycast : MonoBehaviour
                 if (hit.collider.gameObject.CompareTag("InteractivePlane"))
                 {
                     Vector3 pos = hit.collider.gameObject.transform.position;
-                    Instantiate(prefab, new Vector3(hit.collider.gameObject.transform.position.x, hit.collider.gameObject.transform.position.y + prefab.transform.localScale.y / 2, hit.collider.gameObject.transform.position.z), Quaternion.identity);
-
+                    Instantiate(prefab, hit.point + hit.normal * prefab.transform.localScale.y/2, Quaternion.identity);
                 }
-                if (hit.collider.gameObject.GetComponent<InteractiveBox>()) 
+                else if (hit.collider.gameObject.GetComponent<InteractiveBox>()) 
                 {
                     Debug.Log(hit.collider.gameObject.name);
                     if (box == null)

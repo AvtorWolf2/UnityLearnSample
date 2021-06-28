@@ -20,9 +20,10 @@ public class InteractiveBox : MonoBehaviour
 
             if(Physics.Linecast(transform.position, next.transform.position, out RaycastHit hit, obstacleItemsLayerMask))
             {
-                if(hit.collider.gameObject.GetComponent<ObstacleItem>())
+                if(hit.collider.gameObject.TryGetComponent(out ObstacleItem item))
                 {
-                    hit.collider.gameObject.GetComponent<ObstacleItem>().GetDamage(Time.deltaTime);
+                    item.GetDamage(Time.deltaTime);
+                    //hit.collider.gameObject.GetComponent<ObstacleItem>().GetDamage(Time.deltaTime);
                 }
             }
         }
