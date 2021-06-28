@@ -21,7 +21,9 @@ public class InteractiveRaycast : MonoBehaviour
         cam = GetComponent<Camera>();
     }
 
-    private void FixedUpdate()
+
+
+    private void Update()
     {
         if (Input.GetMouseButtonDown(0)) 
         {
@@ -33,11 +35,12 @@ public class InteractiveRaycast : MonoBehaviour
                 if (hit.collider.gameObject.CompareTag("InteractivePlane"))
                 {
                     Vector3 pos = hit.collider.gameObject.transform.position;
-                    Instantiate(prefab, pos , Quaternion.identity, hit.collider.gameObject.transform);
+                    Instantiate(prefab, new Vector3(hit.collider.gameObject.transform.position.x, hit.collider.gameObject.transform.position.y + prefab.transform.localScale.y / 2, hit.collider.gameObject.transform.position.z), Quaternion.identity);
 
                 }
                 if (hit.collider.gameObject.GetComponent<InteractiveBox>()) 
                 {
+                    Debug.Log(hit.collider.gameObject.name);
                     if (box == null)
                     {
                         box = hit.collider.gameObject;
@@ -57,10 +60,9 @@ public class InteractiveRaycast : MonoBehaviour
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit))
             {
-                /*Debug.Log(hit.collider.gameObject.name);*/
-                if (hit.collider.gameObject.CompareTag("InteractivePlane"))
+                if (hit.collider.gameObject.GetComponent<InteractiveBox>())
                 {
-                    Instantiate(prefab, new Vector3(hit.normal.x, prefab.transform.localScale.y / 2, hit.normal.z), Quaternion.identity);
+                    Destroy(hit.collider.gameObject);
                 }
             }
         }

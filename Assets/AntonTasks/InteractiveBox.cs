@@ -15,8 +15,8 @@ public class InteractiveBox : MonoBehaviour
     void FixedUpdate()
     {
         if(next)
-        {
-            Debug.DrawLine(transform.position, next.transform.position, Color.red, 0.5f);
+        {          
+            Debug.DrawLine(transform.position, next.transform.position, Color.red, 0.5f, true);
 
             if(Physics.Linecast(transform.position, next.transform.position, out RaycastHit hit, obstacleItemsLayerMask))
             {
@@ -27,4 +27,12 @@ public class InteractiveBox : MonoBehaviour
             }
         }
     }
+    /*private void OnDrawGizmos()
+    {
+        if (next)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, next.transform.position);
+        }
+    }*/
 }
