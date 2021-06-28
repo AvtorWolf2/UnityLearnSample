@@ -50,7 +50,7 @@ public class InteractiveRaycast : MonoBehaviour
                         next = hit.collider.gameObject;
                         box.GetComponent<InteractiveBox>().AddNext(next.GetComponent<InteractiveBox>());
                         box = null;
-                        next = null;
+                        //next = null;
                     }
                 }
             }

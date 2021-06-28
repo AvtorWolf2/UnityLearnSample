@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6556609572776021903}
   - component: {fileID: 2817934393197638765}
   - component: {fileID: 417474268063109045}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01c1fa02d63d6064aa96f7be1dade38a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentValue: 1
   onDestroyObstacle:
     m_PersistentCalls:
       m_Calls: []
